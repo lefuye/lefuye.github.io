@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://lefuye.github.io/sitemap.xml
