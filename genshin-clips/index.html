@@ -1,0 +1,489 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ADHESIVE CLIPS — throw away your clip here</title>
+<meta name="description" content="Insert your GI / HSR / ZZZ / IDK clips here.">
+<style>
+  @font-face{
+    font-family:'GenshinRip';
+    src:url('fonts/ja-jp.ttf') format('truetype');
+    font-display:swap;
+  }
+
+  :root{
+    --paper:#efe9dc;
+    --ink:#141414;
+    --red:#c81c2c;
+    --bandage:#e3b8a0;
+    --bandage-dark:#c9987e;
+  }
+
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+
+  body{
+    background:#000 url('assets/love.png') repeat;
+    background-size:60px;
+    color:#ffffff;
+    font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+  }
+
+  a{ color:inherit; }
+  :focus-visible{ outline:3px solid var(--red); outline-offset:2px; }
+
+  .heading-font{
+    font-family:'GenshinRip','Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-weight:900;
+    letter-spacing:0.12em;
+    -webkit-text-stroke:1.5px var(--ink);
+    paint-order:stroke fill;
+    text-shadow:
+      -1px -1px 0 var(--ink),
+       1px -1px 0 var(--ink),
+      -1px  1px 0 var(--ink),
+       1px  1px 0 var(--ink);
+  }
+
+  /* ---- status bar ---- */
+  .barcode-strip{
+    width:100%;
+    background:var(--ink);
+    color:var(--paper);
+    padding:9px 16px;
+    font-size:0.66rem;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:space-between;
+    align-items:center;
+    gap:4px 10px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+  }
+  .barcode-strip .dot{
+    display:inline-block; width:7px; height:7px; border-radius:50%;
+    background:#555; margin-right:7px; vertical-align:middle;
+  }
+  .barcode-strip.on .dot{ background:#5ee08a; }
+
+  header.hero{
+    text-align:center;
+    padding:30px 20px 8px;
+    max-width:520px;
+  }
+
+  .box-shot img{
+    width:190px;
+    max-width:56vw;
+    display:block;
+    margin:0 auto 10px;
+  }
+
+  h1.wordmark{
+    font-size:clamp(1.6rem, 7vw, 2.2rem);
+    margin:0 0 4px;
+    line-height:1.1;
+    color:#fff;
+  }
+  h1.wordmark span{ display:block; }
+  h1.wordmark .small{ font-size:0.42em; letter-spacing:0.18em; color:#eee; }
+
+  .stamp{
+    margin:8px auto 4px;
+    font-size:2rem;
+    display:inline-block;
+  }
+  .stamp.error{ filter:grayscale(0.6) sepia(1) hue-rotate(-40deg) saturate(4); }
+
+  .tagline{
+    font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight:400;
+    font-size:0.85rem;
+    color:#fff;
+    max-width:400px;
+    margin:8px auto 0;
+    line-height:1.5;
+  }
+
+  main{ width:100%; max-width:420px; padding:16px 20px 60px; }
+
+  .panel{
+    background:var(--paper);
+    border:2px solid var(--ink);
+    padding:24px 22px;
+  }
+
+  .panel h2{
+    font-family:'GenshinRip','Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-weight:900;
+    letter-spacing:0.08em;
+    font-size:1rem;
+    margin:0 0 6px;
+    text-transform:uppercase;
+    color:var(--ink);
+  }
+  .panel p.sub{
+    color:#4a4a4a;
+    font-size:0.85rem;
+    margin:0 0 18px;
+    line-height:1.5;
+  }
+
+  .stamp-btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    width:100%;
+    padding:14px 16px;
+    border:2px solid var(--ink);
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-weight:800;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    font-size:0.86rem;
+    cursor:pointer;
+  }
+  .stamp-btn.fill{ background:var(--ink); color:var(--paper); }
+  .stamp-btn.fill:hover{ background:#000; }
+  .stamp-btn:disabled{
+    background:#d8d2c3; color:#8b8474; border-color:#8b8474; cursor:not-allowed;
+  }
+
+  .session-row{
+    display:flex; justify-content:space-between; align-items:center;
+    margin-bottom:16px; font-size:0.82rem; flex-wrap:wrap; gap:6px;
+  }
+  .session-row .who b{ background:#fff0a8; padding:0 3px; }
+  .signout{
+    background:none; border:none; color:var(--red);
+    font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight:700; text-decoration:underline;
+    font-size:0.8rem; cursor:pointer; padding:6px 0;
+  }
+
+  label{
+    display:block; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight:700; font-size:0.82rem;
+    color:#333; margin:0 0 6px;
+  }
+  input[type="text"]{
+    width:100%;
+    background:#fff;
+    border:2px solid var(--ink);
+    color:var(--ink);
+    padding:13px 12px;
+    font-family:inherit;
+    font-size:16px;
+    margin-bottom:18px;
+  }
+
+  .dropzone{
+    border:2px dashed var(--ink);
+    background:var(--bandage);
+    padding:22px 14px;
+    text-align:center;
+    cursor:pointer;
+    margin-bottom:18px;
+  }
+  .dropzone.drag{ background:var(--bandage-dark); border-color:var(--red); }
+  .dropzone .dz-title{
+    font-family:'GenshinRip','Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-weight:900; letter-spacing:0.04em; font-size:0.9rem;
+    text-transform:uppercase;
+  }
+  .dropzone .dz-sub{ font-size:0.72rem; color:#4a3226; margin-top:5px; }
+  .dropzone .dz-file{ font-size:0.8rem; color:#3a1c10; margin-top:8px; font-weight:700; word-break:break-all; }
+  .dropzone input{ display:none; }
+
+  .progress-track{
+    height:14px;
+    border:2px solid var(--ink);
+    background:var(--paper);
+    overflow:hidden;
+    margin:16px 0;
+    display:none;
+  }
+  .progress-fill{
+    height:100%; width:0%;
+    background:var(--red);
+  }
+
+  .msg{
+    font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight:700;
+    font-size:0.85rem;
+    margin-top:12px;
+    padding:10px 12px;
+    border:2px solid var(--ink);
+    display:none;
+    line-height:1.4;
+  }
+  .msg.show{ display:block; }
+  .msg.err{ background:#fbdada; border-color:var(--red); color:#7a1119; }
+  .msg.ok{ background:#dcf3e3; border-color:#2e7d46; color:#1f5731; }
+
+  footer{
+    font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size:0.75rem;
+    color:#ffffff;
+    text-align:center;
+    padding:0 24px 40px;
+    max-width:380px;
+    line-height:1.5;
+  }
+
+  [hidden]{ display:none !important; }
+
+  @media (min-width:640px){
+    main{ max-width:460px; padding:22px 20px 70px; }
+    header.hero{ padding:40px 20px 10px; max-width:520px; }
+    .box-shot img{ width:220px; }
+    .panel{ padding:30px 28px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="barcode-strip" id="statusBar">
+  <span><span class="dot"></span><span id="statusText">not signed in</span></span>
+  <span>LEFYE'S ADHESIVE</span>
+</div>
+
+<header class="hero">
+  <div class="box-shot">
+    <img src="assets/adhesive.png" alt="Lefye's Adhesive Bandages — hand-drawn box mockup">
+  </div>
+  <h1 class="wordmark heading-font">
+    <span>ADHESIVE CLIPS</span>
+    <span class="small">LEFYE GAMING IS REAL?!</span>
+  </h1>
+  <div class="stamp" id="stamp">❤️‍🩹</div>
+  <p class="tagline">upload your epic genshin clip or something. it adhesives off the internet and bandages itself straight to the discord.</p>
+</header>
+
+<main>
+  <section class="panel" id="panel"><!-- filled by JS --></section>
+</main>
+
+<footer>
+  under 400mb or it's not making it off the usb stick, bucko. mp4 / mov / webm / mkv / avi. gotta be in the thy Lefye Central to apply a bandage.
+</footer>
+
+<script>
+(function(){
+  var BACKEND_URL = "https://server.tail11ce8d.ts.net";
+  var STORAGE_KEY = "adhesive_token";
+  var USER_KEY = "adhesive_user";
+
+  var panel = document.getElementById("panel");
+  var stamp = document.getElementById("stamp");
+  var statusBar = document.getElementById("statusBar");
+  var statusText = document.getElementById("statusText");
+
+  function setStamp(state){ stamp.className = "stamp " + state; }
+
+  function b64UrlDecode(str){
+    str = str.replace(/-/g, '+').replace(/_/g, '/');
+    while (str.length % 4) str += '=';
+    return decodeURIComponent(atob(str).split('').map(function(c){
+      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+  }
+  function decodeUsernameFromToken(token){
+    try{
+      var payload = JSON.parse(b64UrlDecode(token.split('.')[1]));
+      return payload.username || null;
+    }catch(e){ return null; }
+  }
+
+  var params = new URLSearchParams(window.location.search);
+  var urlToken = params.get('token');
+  if (urlToken) {
+    localStorage.setItem(STORAGE_KEY, urlToken);
+    var uname = decodeUsernameFromToken(urlToken);
+    if (uname) localStorage.setItem(USER_KEY, uname);
+    window.history.replaceState({}, document.title, window.location.pathname);
+  }
+
+  function getToken(){ return localStorage.getItem(STORAGE_KEY); }
+  function getUser(){ return localStorage.getItem(USER_KEY) || 'you'; }
+  function clearSession(){
+    localStorage.removeItem(STORAGE_KEY);
+    localStorage.removeItem(USER_KEY);
+  }
+
+  function renderSignedOut(msg){
+    setStamp('idle');
+    statusBar.classList.remove('on');
+    statusText.textContent = 'not signed in';
+    panel.innerHTML =
+      '<h2>sign in to slap one on</h2>' +
+      '<p class="sub">gotta be in the discord. we only look at your discord id, nothing else, promise.</p>' +
+      '<button class="stamp-btn fill" id="loginBtn">sign in with discord</button>' +
+      (msg ? '<div class="msg err show">' + msg + '</div>' : '');
+    document.getElementById('loginBtn').addEventListener('click', function(){
+      window.location.href = BACKEND_URL + '/auth/login';
+    });
+  }
+
+  function humanSize(bytes){
+    var mb = bytes / (1024*1024);
+    return mb >= 1000 ? (mb/1000).toFixed(2) + ' GB' : mb.toFixed(1) + ' MB';
+  }
+
+  function renderSignedIn(){
+    setStamp('idle');
+    statusBar.classList.add('on');
+    statusText.textContent = 'signed in';
+
+    panel.innerHTML =
+      '<div class="session-row">' +
+        '<span class="who">stuck on as <b>' + getUser() + '</b></span>' +
+        '<button class="signout" id="signOutBtn">peel off</button>' +
+      '</div>' +
+      '<label for="titleInput">what happened</label>' +
+      '<input type="text" id="titleInput" maxlength="120" placeholder="e.g. yae miko one-shot a boss">' +
+      '<div class="dropzone" id="dropzone" tabindex="0">' +
+        '<div class="dz-title">apply clip here</div>' +
+        '<div class="dz-sub">mp4 · mov · webm · mkv · avi — under 400mb</div>' +
+        '<div class="dz-file" id="dzFile"></div>' +
+        '<input type="file" id="fileInput" accept="video/*,.mkv,.avi">' +
+      '</div>' +
+      '<div class="progress-track" id="progressTrack"><div class="progress-fill" id="progressFill"></div></div>' +
+      '<button class="stamp-btn" id="uploadBtn" disabled>choose a clip first</button>' +
+      '<div class="msg" id="msg"></div>';
+
+    var dropzone = document.getElementById('dropzone');
+    var fileInput = document.getElementById('fileInput');
+    var dzFile = document.getElementById('dzFile');
+    var uploadBtn = document.getElementById('uploadBtn');
+    var msg = document.getElementById('msg');
+    var progressTrack = document.getElementById('progressTrack');
+    var progressFill = document.getElementById('progressFill');
+    var selectedFile = null;
+
+    document.getElementById('signOutBtn').addEventListener('click', function(){
+      clearSession();
+      renderSignedOut();
+    });
+
+    dropzone.addEventListener('click', function(){ fileInput.click(); });
+    dropzone.addEventListener('keydown', function(e){
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fileInput.click(); }
+    });
+    ['dragenter','dragover'].forEach(function(evt){
+      dropzone.addEventListener(evt, function(e){
+        e.preventDefault();
+        dropzone.classList.add('drag');
+      });
+    });
+    ['dragleave','drop'].forEach(function(evt){
+      dropzone.addEventListener(evt, function(e){
+        e.preventDefault();
+        dropzone.classList.remove('drag');
+      });
+    });
+    dropzone.addEventListener('drop', function(e){
+      if (e.dataTransfer.files && e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]);
+    });
+    fileInput.addEventListener('change', function(){
+      if (fileInput.files[0]) handleFile(fileInput.files[0]);
+    });
+
+    function handleFile(file){
+      var maxBytes = 400 * 1024 * 1024;
+      var okExt = /\.(mp4|mov|webm|mkv|avi)$/i.test(file.name);
+      if (!okExt) {
+        showMsg("that type's not sticking. use mp4, mov, webm, mkv, or avi.", 'err');
+        return;
+      }
+      if (file.size > maxBytes) {
+        showMsg('that clip is ' + humanSize(file.size) + ' — cap is 400mb.', 'err');
+        return;
+      }
+      selectedFile = file;
+      dzFile.textContent = file.name + ' — ' + humanSize(file.size);
+      uploadBtn.disabled = false;
+      uploadBtn.textContent = 'slap it on';
+      hideMsg();
+    }
+
+    function showMsg(text, kind){ msg.textContent = text; msg.className = 'msg show ' + kind; }
+    function hideMsg(){ msg.className = 'msg'; }
+
+    uploadBtn.addEventListener('click', function(){
+      if (!selectedFile) return;
+      var token = getToken();
+      if (!token) { renderSignedOut('session peeled off — sign in again.'); return; }
+
+      var titleVal = document.getElementById('titleInput').value.trim();
+      var fd = new FormData();
+      fd.append('video', selectedFile);
+      if (titleVal) fd.append('title', titleVal);
+
+      uploadBtn.disabled = true;
+      uploadBtn.textContent = 'sticking…';
+      progressTrack.style.display = 'block';
+      progressFill.style.width = '0%';
+      setStamp('idle');
+      hideMsg();
+
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', BACKEND_URL + '/upload');
+      xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+
+      xhr.upload.addEventListener('progress', function(e){
+        if (e.lengthComputable) {
+          var pct = Math.round((e.loaded / e.total) * 100);
+          progressFill.style.width = pct + '%';
+        }
+      });
+
+      xhr.onload = function(){
+        var data = {};
+        try { data = JSON.parse(xhr.responseText); } catch(e){}
+
+        if (xhr.status === 200 && data.success) {
+          progressFill.style.width = '100%';
+          showMsg('applied. it\'ll show up in the channel any minute.', 'ok');
+          uploadBtn.textContent = 'stick another one on';
+          uploadBtn.disabled = false;
+          selectedFile = null;
+          dzFile.textContent = '';
+          document.getElementById('titleInput').value = '';
+          fileInput.value = '';
+        } else if (xhr.status === 401) {
+          clearSession();
+          renderSignedOut('session peeled off — sign in again.');
+        } else {
+          setStamp('error');
+          showMsg(data.error || "didn't stick — try again in a sec.", 'err');
+          uploadBtn.disabled = false;
+          uploadBtn.textContent = 'try again';
+        }
+      };
+
+      xhr.onerror = function(){
+        setStamp('error');
+        showMsg("couldn't reach the server — check your connection.", 'err');
+        uploadBtn.disabled = false;
+        uploadBtn.textContent = 'try again';
+      };
+
+      xhr.send(fd);
+    });
+  }
+
+  if (getToken()) { renderSignedIn(); } else { renderSignedOut(); }
+})();
+</script>
+</body>
+</html>
