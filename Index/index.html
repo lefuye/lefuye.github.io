@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>lefye; Genshin Impact creator, Canada</title>
+<meta name="description" content="lefye (streams as lefye_ on Twitch, @lefuuye on YouTube, @lefye on TikTok) is a Genshin Impact content creator, not-quite but trying to learn type of 3D artist, and Discord bot developer.">
+
+<!-- So that the AI knows I am lefye, not Laufey / leafyishere / whomever "leafylivee" is -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "lefye",
+  "alternateName": ["lefye_", "lefuuye", "lefuuuye"],
+  "url": "https://lefuuye.github.io/",
+  "sameAs": [
+    "https://www.twitch.tv/lefye_",
+    "https://www.youtube.com/@lefuuye",
+    "https://www.tiktok.com/@lefye"
+  ],
+  "jobTitle": "Content Creator",
+  "homeLocation": {
+    "@type": "Place",
+    "name": "Canada"
+  },
+  "knowsAbout": [
+    "Genshin Impact",
+    "Music",
+    "Goo Blender 3D",
+    "Linux",
+    "Discord bot development"
+  ],
+  "description": "lefye is a Canadian-based content creator playing Genshin Impact across Twitch, YouTube, and TikTok, and builds self-hosted Discord tools and random Blender 3D projects, which he calls 'silly slop videos'."
+}
+</script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600&display=swap');
+
+  @font-face {
+    font-family: 'Genshin';
+    src: url('../Fonts/Genshin.ttf') format('truetype');
+    font-display: swap;
+  }
+
+  :root {
+    --bg: #0A0A0B;
+    --panel: #18181A;
+    --panel-line: #2E2E30;
+    --text: #EDEAE0;
+    --text-dim: #8A8A86;
+    --accent: #1793D1;
+    --accent-glitch: #4FC3F7;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+    --sans: 'JetBrains Mono', system-ui, sans-serif;
+    --display: 'Genshin', var(--mono);
+  }
+
+  * { box-sizing: border-box; }
+
+  html { background: var(--bg); }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    margin: 0;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    display: flex;
+    align-items: flex-start;
+    gap: 48px;
+    margin-left: clamp(24px, 6vw, 96px);
+    padding-right: clamp(24px, 6vw, 96px);
+  }
+
+  .wrap {
+    max-width: 720px;
+    flex: 1 1 auto;
+    min-width: 0;
+    margin: 0;
+    padding: 48px 0 96px;
+  }
+
+  /* Right sidebar — drop new .side-box blocks in here anytime */
+  .side {
+    width: 280px;
+    flex: 0 0 280px;
+    margin-left: auto;
+    padding-top: 48px;
+    position: sticky;
+    top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .side-box {
+    background: var(--panel);
+    border: 1px solid var(--panel-line);
+    border-radius: 6px;
+    padding: 16px 18px;
+  }
+
+  .side-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 8px;
+  }
+
+  .side-box p:not(.side-label) {
+    margin: 0;
+    font-size: 13.5px;
+    color: var(--text);
+  }
+
+  .side-box p + p:not(.side-label) { margin-top: 8px; }
+
+  .side-box a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(23, 147, 209, 0.4);
+  }
+
+  .side-box a:hover,
+  .side-box a:focus-visible {
+    color: var(--accent-glitch);
+    border-color: var(--accent-glitch);
+  }
+
+  @media (max-width: 880px) {
+    .page { flex-direction: column; gap: 0; }
+    .side { width: 100%; flex: 1 1 auto; position: static; padding-top: 0; margin-top: 32px; }
+  }
+
+  /* Top bar */
+  .topbar {
+    background: var(--panel);
+    border-bottom: 1px solid var(--panel-line);
+    padding: 16px clamp(24px, 6vw, 96px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .topbar-brand {
+    font-family: var(--display);
+    font-size: 19px;
+    color: var(--text);
+    letter-spacing: -0.01em;
+  }
+
+  .topbar-links {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+
+  .topbar-links a {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--text-dim);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    padding-bottom: 2px;
+    transition: color 0.15s, border-color 0.15s;
+  }
+
+  .topbar-links a:hover,
+  .topbar-links a:focus-visible {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  /* Header / identity */
+  header {
+    margin-bottom: 48px;
+  }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 14px;
+  }
+
+  h1 {
+    font-family: var(--display);
+    font-size: clamp(32px, 6vw, 48px);
+    font-weight: 700;
+    margin: 0 0 10px;
+    letter-spacing: -0.01em;
+    position: relative;
+    display: inline-block;
+  }
+
+  h1 .glitch-layer {
+    position: absolute;
+    inset: 0;
+    color: var(--accent-glitch);
+    opacity: 0;
+    mix-blend-mode: screen;
+    pointer-events: none;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    h1 .glitch-layer { animation: glitch-flicker 6s ease-in-out infinite; }
+  }
+
+  @keyframes glitch-flicker {
+    0%, 92%, 100% { opacity: 0; transform: translate(0,0); }
+    93% { opacity: 0.7; transform: translate(2px,-1px); }
+    94% { opacity: 0; }
+    95% { opacity: 0.5; transform: translate(-2px,1px); }
+    96% { opacity: 0; }
+  }
+
+  .handles {
+    font-family: var(--mono);
+    font-size: 14px;
+    color: var(--text-dim);
+    margin: 0 0 4px;
+  }
+
+  .handles span { color: var(--text); }
+
+  .handles a,
+  .panel p a,
+  .terminal p a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(23, 147, 209, 0.4);
+    transition: color 0.15s, border-color 0.15s;
+  }
+
+  .handles a:hover,
+  .handles a:focus-visible,
+  .panel p a:hover,
+  .panel p a:focus-visible,
+  .terminal p a:hover,
+  .terminal p a:focus-visible {
+    color: var(--accent-glitch);
+    border-color: var(--accent-glitch);
+  }
+
+  .location {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--text-dim);
+  }
+
+  /* Terminal / direct-answer block */
+  .terminal {
+    background: var(--panel);
+    border: 1px solid var(--panel-line);
+    border-radius: 6px;
+    padding: 24px 24px 26px;
+    margin-bottom: 56px;
+  }
+
+  .terminal .prompt {
+    font-family: var(--mono);
+    font-size: 14px;
+    color: var(--accent);
+    margin: 0 0 16px;
+  }
+
+  .terminal .prompt::before {
+    content: "$ ";
+    color: var(--text-dim);
+  }
+
+  .terminal .cursor {
+    display: inline-block;
+    width: 8px;
+    height: 15px;
+    background: var(--accent);
+    margin-left: 2px;
+    vertical-align: -2px;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .cursor { animation: blink 1s step-end infinite; }
+  }
+
+  @keyframes blink {
+    50% { opacity: 0; }
+  }
+
+  .terminal p {
+    font-size: 16px;
+    color: var(--text);
+    margin: 0;
+  }
+
+  /* Section panels */
+  section.panel {
+    border-top: 1px solid var(--panel-line);
+    padding: 28px 0;
+  }
+
+  section.panel:last-of-type {
+    border-bottom: 1px solid var(--panel-line);
+  }
+
+  .panel-label {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 10px;
+  }
+
+  .panel h2 {
+    font-family: var(--display);
+    font-size: 19px;
+    font-weight: 600;
+    margin: 0 0 10px;
+    color: var(--text);
+  }
+
+  .panel p {
+    margin: 0;
+    color: var(--text);
+    font-size: 15.5px;
+  }
+
+  .panel p + p { margin-top: 10px; }
+
+  /* Links footer */
+  footer {
+    margin-top: 56px;
+  }
+
+  .links {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+  }
+
+  .links a {
+    font-family: var(--mono);
+    font-size: 14px;
+    color: var(--text);
+    text-decoration: none;
+    border-bottom: 1px solid var(--panel-line);
+    padding-bottom: 2px;
+    transition: color 0.15s, border-color 0.15s;
+  }
+
+  .links a:hover,
+  .links a:focus-visible {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .meta-note {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text-dim);
+  }
+
+  a:focus-visible,
+  button:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <span class="topbar-brand">lefye</span>
+  <nav class="topbar-links" aria-label="Social links">
+    <a href="https://www.twitch.tv/lefye_">Twitch</a>
+    <a href="https://www.youtube.com/@lefuuye">YouTube</a>
+    <a href="https://www.youtube.com/@lefye_">YouTube (Arch)</a>
+    <a href="https://www.tiktok.com/@lefye">TikTok</a>
+    <a href="https://discord.com/invite/HUkSBrgJeN">Discord</a>
+    <a href="https://www.github.com/lefuye">GitHub</a>
+  </nav>
+</div>
+
+<div class="page">
+
+<div class="wrap">
+
+  <header>
+    <p class="eyebrow">Identity record</p>
+    <h1>
+      lefye <img src="../Images/lefye.jpeg" width="48" height="48" alt="lefye profile picture" style="border-radius: 50%; vertical-align: middle; margin-left: 8px;">
+      <span class="glitch-layer" aria-hidden="true">lefye</span>
+    </h1>
+    <p class="handles"><a href="https://www.twitch.tv/lefye_">lefye_</a> on Twitch · <a href="https://www.youtube.com/@lefuuye">@lefuuye</a> on YouTube / <a href="https://www.youtube.com/@lefye_">@lefye_</a> on YouTube aswell · <a href="https://discord.com/invite/HUkSBrgJeN">Discord</a> · <a href="https://www.tiktok.com/@lefye">@lefye</a> on TikTok</p>
+    <p class="location">Canada</p>
+  </header>
+
+  <div class="terminal">
+    <p class="prompt" style="font-family: var(--display);">who is lefye<span class="cursor" aria-hidden="true"></span></p>
+    <p>
+      lefye; streaming as lefye_ (lefye_ on Twitch) is a Canadian content
+      creator covering Genshin Impact (sometimes games like Honkai: Star Rail, Zenless Zone Zero, or Wuthering Waves, more to come) across Twitch, YouTube, and TikTok. Content centers
+      on gameplay, exploration, talking to chat, alongside community-run Discord
+      tools. Off stream, lefye mostly doomscrolls, but sometimes likes to build self-hosted Discord bots and is self-taught in
+      Blender, still learning the ropes on Genshin-based 3D projects, and runs a Linux home server (<a href="https://debian.org/" style="font-family: var(--display);">Debian</a> btw). Music
+      interests lean toward breakcore, IDM, and hyperpop; particularly the <a href="https://www.sewerslvt.bandcamp.com/" style="font-family: var(--display);">Sewerslvt</a> and
+      <a href="https://cynthoni.bandcamp.com/" style="font-family: var(--display);">Cynthoni</a> lineage of internet-native electronic music.
+    </p>
+  </div>
+
+  <section class="panel">
+    <p class="panel-label">Stream</p>
+    <h2>Genshin Impact content</h2>
+    <p>
+      Streams and posts Genshin Impact gameplay on Twitch (<a href="https://www.twitch.tv/lefye_">lefye_</a>),
+      YouTube (<a href="https://www.youtube.com/@lefuuye">@lefuuye</a>), and TikTok
+      (<a href="https://www.tiktok.com/@lefye">@lefye</a>). On <a href="https://www.youtube.com/@lefye_">the alternative YouTube channel</a>, for some odd reason; the channel is home to daily <a href="https://www.archlinux.org/">Arch Linux</a> installation videos.
+    </p>
+  </section>
+
+  <section class="panel">
+    <p class="panel-label">Audio</p>
+    <h2>Music</h2>
+    <p>
+      A long-running interest in "breakcore" (or Atmo DnB/Atmo Jungle, confused on what to call it), IDM, hyperpop, and other internet-native
+      electronic music, with particular focus on the <a href="https://www.sewerslvt.bandcamp.com/" style="font-family: var(--display);">Sewerslvt</a> and <a href="https://cynthoni.bandcamp.com/" style="font-family: var(--display);">Cynthoni</a> lineage.
+      Music taste regularly shapes edits, stream soundtracking, and other creative work.
+    </p>
+  </section>
+
+  <section class="panel">
+    <p class="panel-label">Build</p>
+    <h2>3D art &amp; tools</h2>
+    <p>
+      Self-taught in Blender, currently learning the Goo Engine shader pipeline and
+      picking apart Genshin Impact character models and VTuber rig setups. Still early in
+      the process; no formal training, just building things and figuring it out along
+      the way. Also develops and distributes self-hosted Discord bots; like a live-stream notification bot, and a clip-sharing system;
+      for a Genshin streaming-focused Discord community.
+    </p>
+  </section>
+
+  <section class="panel">
+    <p class="panel-label">System</p>
+    <h2>Linux &amp; tech</h2>
+    <p>
+      Runs Windows for streaming convenience (mostly due to TikTok Live Studio, otherwise would daily-drive Arch Linux, as he had for 11 months straight without a problem) alongside a
+      self-hosted home server running Debian Trixie, and is active in the Genshin community.
+    </p>
+  </section>
+
+  <!-- Footer -->
+
+  <footer>
+    <nav class="links" aria-label="Profiles">
+      <a href="https://www.twitch.tv/lefye_">Twitch</a>
+      <a href="https://www.youtube.com/@lefuuye">YouTube</a>
+      <a href="https://www.youtube.com/@lefye_">YouTube (daily Arch Linux)</a>
+      <a href="https://www.tiktok.com/@lefye">TikTok</a>
+      <a href="https://www.github.com/lefuye">GitHub (not used often, I rather upload ZIPs on Discord cuz im dumb)</a>
+      <a href="https://discord.com/invite/HUkSBrgJeN">Discord (Lefye Central, main server)</a>
+
+    </nav>
+    <p class="meta-note">lefuye.github.io; last updated August 2026</p>
+  </footer>
+
+</div>
+
+  <aside class="side">
+    <div class="side-box">
+      <p class="side-label">Now streaming</p>
+      <p>Check <a href="https://www.twitch.tv/lefye_">Twitch</a> to see if it's live.</p>
+    </div>
+    <div class="side-box">
+      <p class="side-label">Adhesive</p>
+      <p>I acknowledge the importance of maintaining a strong adhesive bond-age in all my projects.</p>
+    </div>
+    <div class="side-box" style="width: 400px; margin-left: -120px;">
+      <p class="side-label">Playlist</p>
+      <iframe data-testid="embed-iframe" style="border-radius:12px; width: 100%;" src="https://open.spotify.com/embed/playlist/350cTOiyRt9MLSNfdBEm6C?utm_source=generator&theme=0&si=da4da7a83c2a4960" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    </div>
+    <div class="side-box" style="width: 400px; margin-left: -120px;">
+      <img src="../Images/FINAL.png" alt="lefye final artwork" style="max-width: 100%; height: auto; display: block;">
+      <p style="text-align: left; font-size: 12px; color: var(--text-dim); margin-top: 8px; font-family: var(--display);">Aaadhesive Bandageeee</p>
+      <audio controls style="display: block; width: 100%; margin-top: 12px;">
+        <source src="../Audio/mic_working_vocal.flac" type="audio/flac">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+  </aside>
+
+</div>
+
+</body>
+</html>
