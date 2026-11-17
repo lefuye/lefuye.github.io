@@ -274,7 +274,7 @@
 </main>
 
 <footer>
-  under 400mb or it's not making it off the usb stick, bucko. mp4 / mov / webm / mkv / avi. gotta be in the thy Lefye Central to apply a bandage.
+  under 600mb or it's not making it off the usb stick, bucko. mp4 / mov / webm / mkv / avi. gotta be in the thy Lefye Central to apply a bandage.
 </footer>
 
 <script>
@@ -353,7 +353,7 @@
       '<input type="text" id="titleInput" maxlength="120" placeholder="e.g. yae miko one-shot a boss">' +
       '<div class="dropzone" id="dropzone" tabindex="0">' +
         '<div class="dz-title">apply clip here</div>' +
-        '<div class="dz-sub">mp4 · mov · webm · mkv · avi — under 400mb</div>' +
+        '<div class="dz-sub">mp4 · mov · webm · mkv · avi — under 600mb</div>' +
         '<div class="dz-file" id="dzFile"></div>' +
         '<input type="file" id="fileInput" accept="video/*,.mkv,.avi">' +
       '</div>' +
@@ -399,14 +399,14 @@
     });
 
     function handleFile(file){
-      var maxBytes = 400 * 1024 * 1024;
+      var maxBytes = 600 * 1024 * 1024;
       var okExt = /\.(mp4|mov|webm|mkv|avi)$/i.test(file.name);
       if (!okExt) {
         showMsg("that type's not sticking. use mp4, mov, webm, mkv, or avi.", 'err');
         return;
       }
       if (file.size > maxBytes) {
-        showMsg('that clip is ' + humanSize(file.size) + ' — cap is 400mb.', 'err');
+        showMsg('that clip is ' + humanSize(file.size) + ' — cap is 600mb.', 'err');
         return;
       }
       selectedFile = file;
